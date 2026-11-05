@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Under the same sky — para Nathan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0c1525;
+      --bg-soft: #1a2a40;
+      --blue-soft: #6b8cae;
+      --blue-light: #a8c4d9;
+      --cream: #f5f0e8;
+      --text: #e8eef5;
+      --text-muted: #b8c5d6;
+      --accent: #7a9cc0;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ===== Background sky ===== */
+    .sky {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(60, 90, 140, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(40, 70, 110, 0.3) 0%, transparent 45%),
+        linear-gradient(180deg, #0a1220 0%, #152238 40%, #1c2d48 100%);
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 50% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 70% 50%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 15% 85%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 85% 75%, rgba(255,255,255,0.6), transparent);
+      animation: twinkle 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* ===== Sections ===== */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+    }
+
+    /* ===== Cover ===== */
+    #cover {
+      text-align: center;
+      position: relative;
+    }
+
+    .cover-card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 3rem 2.5rem 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      animation: fadeUp 1.2s ease-out;
+    }
+
+    .cover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 3.8rem);
+      font-weight: 500;
+      color: #d4e0f0;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .cover-title .script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.35em;
+      color: #a8c4d9;
+      display: block;
+      margin-top: -0.15em;
+    }
+
+    .chibi-img {
+      width: min(280px, 70vw);
+      margin: 1.5rem auto 1.8rem;
+      display: block;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.4));
+    }
+
+    .heart-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 40px;
+      background: rgba(90, 120, 160, 0.55);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #e8f0fa;
+      font-size: 1.3rem;
+    }
+
+    .heart-btn:hover {
+      background: rgba(110, 145, 185, 0.75);
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(100, 140, 190, 0.4);
+    }
+
+    /* ===== Intro letter ===== */
+    #intro {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .intro-text {
+      font-size: clamp(1.15rem, 2.8vw, 1.35rem);
+      color: #d8e2ef;
+      text-align: left;
+      line-height: 1.85;
+    }
+
+    .intro-text p {
+      margin-bottom: 1.4rem;
+    }
+
+    .intro-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      color: #c5d8eb;
+      font-style: italic;
+    }
+
+    /* ===== Menu ===== */
+    #menu {
+      text-align: center;
+    }
+
+    .menu-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--blue-light);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .menu-item {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.8rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(168, 196, 217, 0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .menu-item img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+      transition: transform 0.3s ease;
+    }
+
+    .menu-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .menu-item span {
+      font-size: 1.05rem;
+      color: var(--blue-light);
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== Modal ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 14, 26, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: linear-gradient(165deg, rgba(28, 42, 68, 0.97), rgba(18, 28, 48, 0.98));
+      border: 1px solid rgba(168, 196, 217, 0.18);
+      border-radius: 22px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #c5d4e8;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      z-index: 2;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .modal-content {
+      padding: 2.8rem 2.2rem 2.5rem;
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      color: #d4e4f5;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+
+    .modal-title .script {
+      font-family: 'Great Vibes', cursive;
+      color: #a8c4d9;
+      font-size: 1.25em;
+    }
+
+    .modal-body {
+      font-size: 1.18rem;
+      color: #cdd9e8;
+      line-height: 1.85;
+      text-align: left;
+    }
+
+    .modal-body p {
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .poem-lines {
+      text-align: center;
+      font-size: 1.22rem;
+      line-height: 1.95;
+      color: #d0dceb;
+    }
+
+    .poem-lines p {
+      margin-bottom: 0.9rem;
+    }
+
+    .poem-signature {
+      margin-top: 1.8rem;
+      font-style: italic;
+      color: #a8c4d9;
+      text-align: center;
+    }
+
+    /* ===== External links (cassette & camera) ===== */
+    .external-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .external-card img {
+      width: 90px;
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+    }
+
+    .external-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #d4e4f5;
+      margin-bottom: 0.8rem;
+    }
+
+    .external-card p {
+      color: #a8b8cc;
+      margin-bottom: 1.8rem;
+      font-size: 1.1rem;
+    }
+
+    .open-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(100, 140, 185, 0.35);
+      color: #e8f0fa;
+      text-decoration: none;
+      padding: 0.75rem 1.6rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      border: 1px solid rgba(168, 196, 217, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .open-link:hover {
+      background: rgba(120, 160, 205, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(80, 120, 180, 0.3);
+    }
+
+    /* ===== Footer note ===== */
+    .footer-note {
+      text-align: center;
+      padding: 3rem 1.5rem 4rem;
+      color: #8a9bb0;
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Scrollbar for modal */
+    .modal::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(168, 196, 217, 0.25);
+      border-radius: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .cover-card {
+        padding: 2.2rem 1.4rem 2rem;
+      }
+      .glass-card {
+        padding: 1.8rem 1.3rem;
+      }
+      .menu-grid {
+        gap: 1.2rem;
+      }
+      .menu-item {
+        padding: 1.4rem 0.8rem;
+      }
+      .menu-item img {
+        width: 58px;
+        height: 58px;
+      }
+      .modal-content {
+        padding: 2.2rem 1.4rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky"></div>
+  <div class="stars"></div>
+
+  <!-- ===== COVER ===== -->
+  <section id="cover">
+    <div class="cover-card">
+      <h1 class="cover-title">
+        Under the
+        <span class="script">same sky</span>
+      </h1>
+      <img src="assets/image2.png" alt="Chibi" class="chibi-img" />
+      <button class="heart-btn" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})" aria-label="Continuar">
+        ♡
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section id="intro">
+    <div class="glass-card fade-in">
+      <div class="intro-text">
+        <p>Hay cosas que a veces no encontramos la manera de decir en una conversación, sentimientos que se quedan guardados entre palabras cotidianas y pequeños momentos que quizá parecen insignificantes, pero que terminan significando muchísimo.</p>
+        <p>Por eso quise reunir aquí algunas de esas cosas: palabras que escribí pensando en ti, canciones que me gustaría compartir contigo y pequeños detalles que llevan un poquito de mi cariño.</p>
+        <p>No tienes que leerlo todo de una vez. Puedes recorrer este pequeño espacio a tu propio ritmo y detenerte donde quieras.</p>
+        <p>Solo quería regalarte algo que pudieras conservar y que, cada vez que lo visites, te recuerde algo muy sencillo: <span class="highlight">Me alegra muchísimo que formes parte de mi vida, Nathan.</span> ♡</p>
+      </div>
+      <div style="text-align:center; margin-top: 2rem;">
+        <button class="heart-btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">♡</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section id="menu">
+    <p class="menu-title fade-in">Elige por dónde empezar</p>
+    <div class="menu-grid fade-in">
+      <div class="menu-item" onclick="openModal('letter')">
+        <img src="assets/image3.png" alt="Carta" />
+        <span>Carta</span>
+      </div>
+      <div class="menu-item" onclick="openModal('music')">
+        <img src="assets/image4.png" alt="Canciones" />
+        <span>Canciones</span>
+      </div>
+      <div class="menu-item" onclick="openModal('tiktok')">
+        <img src="assets/image5.png" alt="TikTok" />
+        <span>Momentos</span>
+      </div>
+      <div class="menu-item" onclick="openModal('poem')">
+        <img src="assets/image6.png" alt="Poema" />
+        <span>Poema</span>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer-note fade-in">Hecho con mucho cariño · Under the same sky</p>
+
+  <!-- ===== MODAL: LETTER ===== -->
+  <div class="modal-overlay" id="modal-letter">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('letter')">×</button>
+      <div class="modal-content">
+        <h2 class="modal-title">My <span class="script">sweet</span> angel</h2>
+        <div class="modal-body" style="margin-top: 1.8rem;">
+          <p>Llegaste a mi vida cuando menos lo esperaba, pero, curiosamente, cuando más necesitaba encontrar a alguien como tú. No sabía que conocer a una persona podía convertirse en algo tan significativo, ni que alguien podía llegar a ocupar un lugar tan especial sin que uno siquiera se diera cuenta de cuándo ocurrió. Simplemente apareciste, comenzamos a compartir pequeños momentos y, poco a poco, te convertiste en alguien a quien quiero muchísimo.</p>
+          <p>No sé si alguna vez llegarás a comprender cuánto te quiero. Y no lo digo porque no encuentre la manera de expresarlo, sino porque, sinceramente, hay sentimientos que parecen demasiado grandes para caber en palabras. El cariño que te tengo es uno de ellos.</p>
+          <p>Amo tantas cosas de ti que no sé por dónde empezar. Amo tu emoción cuando hablas de algo que te interesa, la manera en que tu voz acompaña tus palabras, tus expresiones, tus ideas y esa forma tan tuya de interpretar las cosas. Me gusta escucharte, incluso cuando hablamos de cualquier tontería, porque nunca siento que sea tiempo perdido si puedo compartirlo contigo. Me interesa lo que piensas, lo que te entusiasma, aquello que te preocupa y hasta esas pequeñas cosas de tu día que quizá no consideras importante.</p>
+          <p>A veces, al despertar, una de las primeras cosas que deseo es poder hablar contigo. Me hace ilusión encontrarte, saber cómo estás, escuchar algo de ti y compartir un pedacito de mi día contigo. Y cuando estoy ocupado y no puedo hacerlo, incluso llego a molestarme con mis propias circunstancias, porque hay una parte de mí que simplemente quisiera tener tiempo para escucharte. Supongo que esa es una de las maneras en las que he descubierto cuánto disfruto de tu compañía.</p>
+          <p>Quiero que sepas que no eres una amistad cualquiera para mí. Te quiero de una manera inmensa, de esas que no se limitan a una conversación, a un momento bonito o a la frecuencia con la que hablamos. Te quiero porque eres tú. Porque me importa tu bienestar, porque deseo verte feliz, porque quiero que tengas oportunidades maravillosas y porque, si pudiera regalarte algo, sería la posibilidad de que la vida te tratara con toda la ternura que mereces.</p>
+          <p>Si pudiera pedirle algo a la vida, sería que te concediera muchísimos motivos para sonreír, que jamás pierdas aquello que te hace tan especial y que, cuando dudes de ti mismo, encuentres razones para recordar lo maravilloso que eres.</p>
+          <p style="text-align:center; margin-top: 2rem; color: #a8c4d9;">♡</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: POEM ===== -->
+  <div class="modal-overlay" id="modal-poem">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('poem')">×</button>
+      <div class="modal-content">
+        <h2 class="modal-title" style="margin-bottom: 1.8rem;">Para ti</h2>
+        <div class="poem-lines">
+          <p>Llegaste sin anunciarte,<br>cuando menos te esperaba,<br>y sin saber cuánto te necesitaba,<br>te volviste luz en mis mañanas.</p>
+          <p>Amo el brillo de tu emoción,<br>tu voz, tus ideas, tu manera de ser;<br>esas pequeñas partes de ti<br>que nunca me cansaría de conocer.</p>
+          <p>Y si el mundo pudiera escucharte<br>con la ternura con la que te escucho yo,<br>quizá entendería por qué tu existencia<br>se ha vuelto un regalo para mi corazón.</p>
+          <p>Porque entre tantas personas y caminos,<br>qué fortuna haber coincidido contigo.<br>Mi dulce ángel, qué bonito es el mundo<br>desde que tengo el privilegio de ser tu amigo. ♡</p>
+        </div>
+        <div class="poem-signature">
+          <p>Escribí estos versos pensando en ti…<br>Y si alguna vez vuelves a leer esto, recuerda que hay alguien que agradece profundamente tu existencia y que te quiere muchísimo, mi dulce ángel. ♡</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: MUSIC ===== -->
+  <div class="modal-overlay" id="modal-music">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('music')">×</button>
+      <div class="modal-content external-card">
+        <img src="assets/image4.png" alt="Cassette" />
+        <h3>Canciones para ti</h3>
+        <p>Una playlist que me gustaría compartir contigo.</p>
+        <a class="open-link" href="https://www.youtube.com/playlist?list=PLEzyq7M_xLNY" target="_blank" rel="noopener">
+          Abrir playlist ♡
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: TIKTOK ===== -->
+  <div class="modal-overlay" id="modal-tiktok">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('tiktok')">×</button>
+      <div class="modal-content external-card">
+        <img src="assets/image5.png" alt="Cámara" />
+        <h3>Momentos</h3>
+        <p>Un pequeño pedacito guardado en TikTok.</p>
+        <a class="open-link" href="https://vt.tiktok.com/ZS9yovM2T5Ttr-SSYJ5/" target="_blank" rel="noopener">
+          Ver en TikTok ♡
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Open / close modals
+    function openModal(id) {
+      const overlay = document.getElementById('modal-' + id);
+      if (overlay) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(id) {
+      const overlay = document.getElementById('modal-' + id);
+      if (overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(o => {
+          o.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
